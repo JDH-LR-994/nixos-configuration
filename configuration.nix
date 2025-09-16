@@ -8,11 +8,16 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./modules/system/system.nix
+#      <home-manager/nixos>
     ];
 
+#  home-manager.users.andrey = import /home/andrey/.config/home-manager/home.nix;
+  
   # Virtual Box
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "andrey" ];
+  
   # Hyprland 
   programs.hyprland = {
     enable = true;
@@ -26,14 +31,16 @@
   };
   
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  nix.settings.experimental-features = ["nix-command" "flakes"]; # Use flakes
+
+# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -45,20 +52,6 @@
   # Set your time zone.
   time.timeZone = "Europe/Moscow";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "ru_RU.UTF-8";
-    LC_IDENTIFICATION = "ru_RU.UTF-8";
-    LC_MEASUREMENT = "ru_RU.UTF-8";
-    LC_MONETARY = "ru_RU.UTF-8";
-    LC_NAME = "ru_RU.UTF-8";
-    LC_NUMERIC = "ru_RU.UTF-8";
-    LC_PAPER = "ru_RU.UTF-8";
-    LC_TELEPHONE = "ru_RU.UTF-8";
-    LC_TIME = "ru_RU.UTF-8";
-  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -81,19 +74,21 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
+    os-prober
+    gparted
     kdePackages.dolphin
     wget
     git
-    rofi-wayland
+    rofi
     waybar
     hyprpaper
     kitty
+    exfatprogs
     telegram-desktop
     firefox
     freerdp
     fastfetch
     cpufetch
-    home-manager
     pavucontrol
     tree
     btop
