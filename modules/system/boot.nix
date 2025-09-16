@@ -10,13 +10,18 @@
         device = "nodev";
         efiSupport = true;
         extraEntries = ''
-	menuentry "CachyOS" {
+	menuentry "CachyOS Linux" {
+	  set gfxplayload=keep
+	  insmod gzio
 	  insmod part_gpt
-	  insmod btrfs
-	  search --no-floppy --fs-uuid --set=root 829eee0a-8a3e-403a-863a-6448bcd175de
-	  confidfile /boot/grub/grub.cfg
-	} 
-	''
+          insmod btrfs
+          search --no-floppy --fs-uuid --set=root 829eee0a-8a3e-403a-863a-6448bcd175de
+	  echo 'Loading Linux linux-cachyos ...'
+          linux /@/boot/vmlinuz-linux-cachyos root=UUID=829eee0a-8a3e-403a-863a-6448bcd175de rw rootflags=subvol=@ nowatchdog nvme_load=YES zswap.enabled=0 splash loglevel=3
+          echo 'Loading initial ramdisk ...'
+	  initrd /@/boot/initramfs-linux-cachyos.img
+      }
+	'';
       };
     };
   };

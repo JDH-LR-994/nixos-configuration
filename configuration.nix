@@ -74,7 +74,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
-    os-prober
+    alacritty
     gparted
     kdePackages.dolphin
     wget
