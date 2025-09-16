@@ -29,13 +29,6 @@
     enable = true;
     wayland.enable = true;
   };
-  
-  # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
-
-  # Use latest kernel.
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos"; # Define your hostname.
   nix.settings.experimental-features = ["nix-command" "flakes"]; # Use flakes
@@ -82,7 +75,6 @@
     rofi
     waybar
     hyprpaper
-    kitty
     exfatprogs
     telegram-desktop
     firefox

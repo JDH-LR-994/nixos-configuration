@@ -9,8 +9,9 @@
         enable = true;
         device = "nodev";
         efiSupport = true;
+	theme = pkgs.catppuccin-grub;
         extraEntries = ''
-	menuentry "CachyOS Linux" {
+	menuentry "CachyOS Linux" --class cachyos --class arch --class gnu-linux --class os {
 	  set gfxplayload=keep
 	  insmod gzio
 	  insmod part_gpt
