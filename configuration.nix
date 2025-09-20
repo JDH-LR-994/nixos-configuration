@@ -12,22 +12,22 @@
 #      <home-manager/nixos>
     ];
 
+    nix.gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 30d";
+    };
 #  home-manager.users.andrey = import /home/andrey/.config/home-manager/home.nix;
-  
+
   # Virtual Box
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "andrey" ];
-  
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+
   # Hyprland 
   programs.hyprland = {
     enable = true;
     xwayland.enable = true; 
-  };
-  
-
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -67,7 +67,11 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
+    sddm-astronaut
+    kdePackages.qtmultimedia
+    libreoffice-fresh
     alacritty
+    kitty
     gparted
     kdePackages.dolphin
     wget

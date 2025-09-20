@@ -5,11 +5,13 @@
     kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       efi.canTouchEfiVariables = true;
+      timeout = 15;
       grub = {
         enable = true;
         device = "nodev";
         efiSupport = true;
 	theme = pkgs.catppuccin-grub;
+	configurationLimit = 5;
         extraEntries = ''
 	menuentry "CachyOS Linux" --class cachyos --class arch --class gnu-linux --class os {
 	  set gfxplayload=keep
