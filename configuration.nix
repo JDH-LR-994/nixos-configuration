@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./modules/system/system.nix
+      ./modules/packages/packages.nix
 #      <home-manager/nixos>
     ];
 
@@ -62,34 +63,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    neovim
-    sddm-astronaut
-    kdePackages.qtmultimedia
-    libreoffice-fresh
-    alacritty
-    kitty
-    gparted
-    kdePackages.dolphin
-    wget
-    git
-    rofi
-    waybar
-    hyprpaper
-    exfatprogs
-    telegram-desktop
-    firefox
-    freerdp
-    fastfetch
-    cpufetch
-    pavucontrol
-    tree
-    btop
-    neohtop
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

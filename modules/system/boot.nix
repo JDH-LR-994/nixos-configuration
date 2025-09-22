@@ -12,6 +12,7 @@
         efiSupport = true;
 	theme = pkgs.catppuccin-grub;
 	configurationLimit = 5;
+	
         extraEntries = ''
 	menuentry "CachyOS Linux" --class cachyos --class arch --class gnu-linux --class os {
 	  set gfxplayload=keep
@@ -25,6 +26,21 @@
 	  initrd /@/boot/initramfs-linux-cachyos.img
       }
 	'';
+      };
+    };
+  };
+  specialisation = {
+    virtual-machine = {
+      inheritParentConfig = true;
+      configuration = {
+        boot = {
+          kernelParams = [ "kvm.enable_virt_at_load=0" ];
+          loader.grub = {
+            configurationName = "NixOS for VM";
+            entryOptions = "--class nixos --class gnu-linux --unrestricted"; 
+          };
+        };
+	system.nixos.label = "VM-Specialisation";
       };
     };
   };
