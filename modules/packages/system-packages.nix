@@ -9,5 +9,6 @@
     exfatprogs 		    	# Util for exfat filesystem
     pavucontrol 	    	# Package for sound control
     kdePackages.dolphin     	# Filemanager
+    home-manager		# Home-manager
   ];
 }

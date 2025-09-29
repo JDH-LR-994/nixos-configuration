@@ -13,12 +13,8 @@
 #      <home-manager/nixos>
     ];
 
-    nix.gc = {
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 30d";
-    };
 #  home-manager.users.andrey = import /home/andrey/.config/home-manager/home.nix;
+
 
   # Virtual Box
   virtualisation.virtualbox.host.enable = true;
